@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-header">
+    <h2>รายงานสินค้าคงเหลือ</h2>
+</div>
+
+<div class="list-container">
+{% for p in products %}
+    <div class="card item-card report-card">
+        <div class="item-info">
+            <div class="item-title">{{p.name}}</div>
+            <div class="item-subtitle">รหัส: {{p.code}} | ขั้นต่ำ: {{p.min_qty}}</div>
+        </div>
+        <div class="item-qty {% if p.stock_qty <= p.min_qty %}low-stock{% endif %}">
+            <span>{{p.stock_qty}}</span>
+            <small>{% if p.stock_qty <= p.min_qty %}ใกล้หมด{% else %}เพียงพอ{% endif %}</small>
+        </div>
+    </div>
+{% else %}
+    <div class="card empty-card">
+        <p>ไม่มีสินค้าให้แสดงรายงาน</p>
+    </div>
+{% endfor %}
+</div>
+{% endblock %}
