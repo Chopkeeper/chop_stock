@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chop Stock</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="{{ url_for('product') }}" class="nav-link {% if active_page == 'product' %}active{% endif %}">
+            <i class="fa-solid fa-box-archive"></i>
+            <span>สินค้า</span>
+        </a>
+        <a href="{{ url_for('issue') }}" class="nav-link {% if active_page == 'issue' %}active{% endif %}">
+            <i class="fa-solid fa-arrow-up-from-bracket"></i>
+            <span>เบิกของ</span>
+        </a>
+        <a href="{{ url_for('add_stock') }}" class="nav-link {% if active_page == 'add_stock' %}active{% endif %}">
+            <i class="fa-solid fa-circle-plus"></i>
+            <span>เพิ่มของ</span>
+        </a>
+        <a href="{{ url_for('report_stock') }}" class="nav-link {% if active_page == 'report_stock' %}active{% endif %}">
+            <i class="fa-solid fa-chart-pie"></i>
+            <span>รายงาน</span>
+        </a>
+    </nav>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

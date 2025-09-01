@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-header">
+    <h2>เพิ่มสต็อกสินค้า</h2>
+</div>
+<div class="card form-card">
+    <form method="POST">
+        <select name="product_id" required>
+            <option value="" disabled selected>-- เลือกสินค้า --</option>
+            {% for p in products %}
+            <option value="{{ p.id }}">{{ p.name }}</option>
+            {% endfor %}
+        </select>
+        <input type="number" name="quantity" placeholder="จำนวนที่เพิ่ม" required>
+        <input type="text" name="note" placeholder="หมายเหตุ (ถ้ามี)">
+        <button type="submit" class="btn-primary">
+            <i class="fa-solid fa-check"></i> ยืนยันการเพิ่ม
+        </button>
+    </form>
+</div>
+
+<div class="list-container">
+    <h3>รายการเพิ่มล่าสุด</h3>
+    {% for item in add_items|reverse %}
+    <div class="card item-card history-card">
+        <div class="item-info">
+            <div class="item-title">{{ item.product.name }}</div>
+            <div class="item-subtitle">Doc: {{ item.add.doc_number }} | วันที่: {{ item.add.date.strftime('%d-%m-%Y') }}</div>
+        </div>
+        <div class="item-qty add">
+            <span>+{{ item.quantity }}</span>
+        </div>
+    </div>
+    {% else %}
+    <div class="card empty-card">
+        <p>ยังไม่มีรายการเพิ่มสต็อก</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
